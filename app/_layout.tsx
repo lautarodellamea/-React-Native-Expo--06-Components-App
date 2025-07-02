@@ -17,6 +17,7 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import { allRoutes } from "@/constants/Routes";
 
 import "../global.css";
+import { StatusBar } from "react-native";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -46,6 +47,13 @@ export default function RootLayout() {
     <GestureHandlerRootView
       style={{ backgroundColor: backgroundColor, flex: 1 }}
     >
+      {/* barra de navegacion de arriba (bateria, wifi, etc) */}
+      <StatusBar
+        barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
+        backgroundColor={backgroundColor} // útil en Android
+        translucent={false}
+      />
+
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         {/* cambiar el tema a modo oscuro el cel para ver la funcionalidad */}
         {/* En la vida real usaremos o nativeWind o el hook que nos da expo para manejar el tema */}
