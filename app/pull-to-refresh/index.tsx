@@ -1,21 +1,23 @@
-import { useThemeColor } from '@/hooks/useThemeColor';
-import ThemedText from '@/presentation/shared/ThemedText';
-import ThemedView from '@/presentation/shared/ThemedView';
-import { useState } from 'react';
-import { View, Text, ScrollView, RefreshControl } from 'react-native';
+import { useThemeColor } from "@/hooks/useThemeColor";
+import ThemedText from "@/presentation/shared/ThemedText";
+import ThemedView from "@/presentation/shared/ThemedView";
+import { useState } from "react";
+import { View, Text, ScrollView, RefreshControl } from "react-native";
 
 const PullToRefreshScreen = () => {
+  const primaryColor = useThemeColor({}, "primary");
+  const backgroundColor = useThemeColor(
+    { dark: "black", light: "white" },
+    "background"
+  );
 
-  const primaryColor = useThemeColor({}, 'primary');
-
-
-  const [isRefreshing, setIsRefreshing] = useState(false)
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const onRefresh = async () => {
-    setIsRefreshing(true)
-    await new Promise(resolve => setTimeout(resolve, 3000))
-    setIsRefreshing(false)
-  }
+    setIsRefreshing(true);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    setIsRefreshing(false);
+  };
 
   return (
     <ScrollView
@@ -23,13 +25,13 @@ const PullToRefreshScreen = () => {
         <RefreshControl
           refreshing={isRefreshing}
           onRefresh={onRefresh}
-          colors={[primaryColor, 'red', 'orange', 'green']} // en IOS no cambia esto, podemos poner un loader personalizado si queremos
+          colors={[primaryColor, "red", "orange", "green"]} // en IOS no cambia esto, podemos poner un loader personalizado si queremos
+          progressBackgroundColor={backgroundColor}
         />
-      }>
+      }
+    >
       <ThemedView margin>
         <ThemedText>PullToRefreshScreen</ThemedText>
-
-
       </ThemedView>
     </ScrollView>
   );
