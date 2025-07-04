@@ -11,6 +11,9 @@ import {
   ThemeProvider,
 } from '@react-navigation/native';
 import { useColorScheme } from 'nativewind';
+
+// https://docs.expo.dev/develop/user-interface/store-data/
+// https://react-native-async-storage.github.io/async-storage/docs/usage/
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colors } from '@/constants/Colors';
 

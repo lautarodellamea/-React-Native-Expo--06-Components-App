@@ -18,6 +18,7 @@ import { allRoutes } from "@/constants/Routes";
 
 import "../global.css";
 import { StatusBar } from "react-native";
+import { ThemeChangerProvider } from "@/presentation/context/ThemeChangerContext";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -47,53 +48,56 @@ export default function RootLayout() {
     <GestureHandlerRootView
       style={{ backgroundColor: backgroundColor, flex: 1 }}
     >
-      {/* barra de navegacion de arriba (bateria, wifi, etc) */}
-      <StatusBar
-        barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
-        backgroundColor={backgroundColor} // útil en Android
-        translucent={false}
-      />
 
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        {/* cambiar el tema a modo oscuro el cel para ver la funcionalidad */}
-        {/* En la vida real usaremos o nativeWind o el hook que nos da expo para manejar el tema */}
-        {/* <View className='bg-light-background dark:bg-dark-background'>
+      <ThemeChangerProvider>
+        {/* barra de navegacion de arriba (bateria, wifi, etc) */}
+        <StatusBar
+          barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
+          backgroundColor={backgroundColor} // útil en Android
+          translucent={false}
+        />
+
+        <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+          {/* cambiar el tema a modo oscuro el cel para ver la funcionalidad */}
+          {/* En la vida real usaremos o nativeWind o el hook que nos da expo para manejar el tema */}
+          {/* <View className='bg-light-background dark:bg-dark-background'>
           <Text className='mt-10 text-3xl text-light-primary dark:text-dark-text'>Hola Mundo</Text>
         </View> */}
 
-        {/* <Text className='mt-10 text-3xl text-light-primary dark:text-dark-text'>Hola Mundo</Text> */}
+          {/* <Text className='mt-10 text-3xl text-light-primary dark:text-dark-text'>Hola Mundo</Text> */}
 
-        {/* <ThemedView margin> */}
+          {/* <ThemedView margin> */}
 
-        {/* usando mis componentes personalizados*/}
-        {/* <Text className='mt-10 text-3xl text-light-primary dark:text-dark-text'>Componente personalizado</Text> */}
+          {/* usando mis componentes personalizados*/}
+          {/* <Text className='mt-10 text-3xl text-light-primary dark:text-dark-text'>Componente personalizado</Text> */}
 
-        {/* Usando mi componente ThemedText */}
-        {/* <ThemedText type='h1' className='mt-20 text-white' numberOfLines={2}>Mi componente ThemedText Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam, voluptatum!</ThemedText> */}
-        {/* </ThemedView> */}
+          {/* Usando mi componente ThemedText */}
+          {/* <ThemedText type='h1' className='mt-20 text-white' numberOfLines={2}>Mi componente ThemedText Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam, voluptatum!</ThemedText> */}
+          {/* </ThemedView> */}
 
-        <Stack
-          screenOptions={{
-            headerShadowVisible: false,
-            contentStyle: {
-              backgroundColor: backgroundColor,
-            },
-            headerStyle: {
-              backgroundColor: backgroundColor,
-            },
-          }}
-        >
-          <Stack.Screen name="index" options={{ title: "" }} />
+          <Stack
+            screenOptions={{
+              headerShadowVisible: false,
+              contentStyle: {
+                backgroundColor: backgroundColor,
+              },
+              headerStyle: {
+                backgroundColor: backgroundColor,
+              },
+            }}
+          >
+            <Stack.Screen name="index" options={{ title: "" }} />
 
-          {allRoutes.map((route) => (
-            <Stack.Screen
-              key={route.name}
-              name={route.name}
-              options={{ title: route.title }}
-            />
-          ))}
-        </Stack>
-      </ThemeProvider>
+            {allRoutes.map((route) => (
+              <Stack.Screen
+                key={route.name}
+                name={route.name}
+                options={{ title: route.title }}
+              />
+            ))}
+          </Stack>
+        </ThemeProvider>
+      </ThemeChangerProvider>
     </GestureHandlerRootView>
   );
 }

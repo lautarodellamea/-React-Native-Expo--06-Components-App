@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useColorScheme } from 'nativewind';
 // import { useColorScheme } from 'react-native';
 
+import { useThemeChangerContext } from '@/presentation/context/ThemeChangerContext';
 
 import ThemedCard from '@/presentation/shared/ThemedCard';
 import ThemedSwitch from '@/presentation/shared/ThemedSwitch';
 import ThemedView from '@/presentation/shared/ThemedView';
-import { useThemeChangerContext } from '@/presentation/context/ThemeChangerContext';
 
 const ThemesScreen = () => {
   // const { colorScheme, setColorScheme } = useColorScheme();
